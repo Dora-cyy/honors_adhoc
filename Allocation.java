@@ -1,14 +1,20 @@
 import java.util.*;
 public class Allocation {
-    private final String observer;
-    private final Map<String, Group> groups; //vertices
-    private int populationSize; //total number of people
-    private final Map<Group, Double> demography; //the distribution of population in proportion to total size
-    private int resourceAmount;
-    private final Map<Group, Double> resource; //the distribution of resource in proportion to total amount
+    // title and count: how many times the situation is chosen
+    //private final String
+    public final String title;
+    public final String observer;
+    public final Map<String, Group> groups; //vertices
+    public int populationSize; //total number of people
+    public final Map<Group, Double> demography; //the distribution of population in proportion to total size
+    public int resourceAmount;
+    public final Map<Group, Double> resource; //the distribution of resource in proportion to total amount
 
-    public Allocation (String observer) {
+    public Allocation (String observer, String title) {
+        this.title = title;
         this.groups = new HashMap<>();
+        this.populationSize = 0;
+        this.resourceAmount = 0;
         this.demography = new HashMap<>();
         this.resource = new HashMap<>();
         this.observer = observer;
@@ -22,8 +28,16 @@ public class Allocation {
         if (!this.groups.containsKey(g.name)) {
             this.groups.put(g.name, g);
         }
+
     }
 
+    public Collection<Group> getGroups() {
+        return this.groups.values();
+    }
+
+    public Group find (String name) {
+        return this.groups.get(name);
+    }
     // precondition:
     // groups must contain g
     // size must be at least 1

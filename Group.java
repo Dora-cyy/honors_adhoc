@@ -7,26 +7,24 @@ public class Group {
      form of scores allocated. In the map, the key should be an out-group, and the value should
      be the scores that current in-group allocate toward the out-group
      */
-    private Map<Group, Integer> allocation;
+    public Map<Group, Integer> allocation;
     /* a map that represents the implicit relationship, or relevance current in-group
     has with each out-group*/
-    private Map<Group, Integer> relevance;
+    public Map<Group, Integer> relevance;
     /* a map that represents the group's attitude toward the other groups */
-    private Map<Group, Integer> outwardAttitude;
+    public Map<Group, Integer> outwardAttitude;
 
     /* a map that represents the other groups' attitude toward the current group */
-    private Map<Group, Integer> inwardAttitude;
+    public Map<Group, Integer> inwardAttitude;
 
     public Group (String name) {
         this.name = name;
         this.allocation = new HashMap<>();
+        this.relevance = new HashMap<>();
         this.outwardAttitude = new HashMap<>();
         this.inwardAttitude = new HashMap<>();
     }
 
-    public void setOutwardAttitude (Group g, Integer attitude) {
-
-    }
 
     public void setAllocation(Group g, int score) {
         if (allocation.containsKey(g)) {
@@ -35,4 +33,7 @@ public class Group {
         allocation.put(g,score);
     }
 
+    public Map<Group, Integer> getAllocation() {
+        return allocation;
+    }
 }
