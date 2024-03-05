@@ -28,7 +28,6 @@ public class Allocation {
         if (!this.groups.containsKey(g.name)) {
             this.groups.put(g.name, g);
         }
-
     }
 
     public Collection<Group> getGroups() {

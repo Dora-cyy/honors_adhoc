@@ -1,4 +1,27 @@
-Allocation: A1
-observer: researcher
-groups: 
-  - test
+Allocation: 
+  - title: A2
+    observer: researcher
+    groups: 
+      - name: dusek
+      - name: tausig
+    populationSize: 20
+    demography: 
+      - group: dusek
+        proportion: 1.0
+      - group: tausig
+        proportion: 0.5
+    resourceAmount: 20
+    resource: 
+  - title: A1
+    observer: in-group member
+    groups: 
+      - name: dusek
+      - name: tausig
+    populationSize: 20
+    demography: 
+      - group: tausig
+        proportion: 0.5
+      - group: dusek
+        proportion: 1.0
+    resourceAmount: 20
+    resource: 

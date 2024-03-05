@@ -1,6 +1,9 @@
 <component name="libraryTable">
   <library name="esotericsoftware.yamlbeans" type="repository">
     <properties maven-id="com.esotericsoftware.yamlbeans:yamlbeans:1.13" />
+    <ANNOTATIONS>
+      <root url="file://$PROJECT_DIR$/out/production/honors_adhoc/javafx-sdk-21.0.2/lib" />
+    </ANNOTATIONS>
     <CLASSES>
       <root url="jar://$MAVEN_REPOSITORY$/com/esotericsoftware/yamlbeans/yamlbeans/1.13/yamlbeans-1.13.jar!/" />
     </CLASSES>

@@ -10,15 +10,37 @@ public class ScenarioRecord {
     private FileWriter file;
     private FileReader previousFile;
     private Scanner input;
-    private Set<Allocation> history;
+    public Set<Allocation> history;
 
     public ScenarioRecord() {
-        this.history = new HashSet<>();
-        this.input = new Scanner(System.in);
+        try{
+            this.history = new HashSet<>();
+            loadHistory();
+            this.input = new Scanner(System.in);}
+        catch (IOException io){
+            System.out.println(io);
+        }
+
     }
 
-    public void addRecord(Allocation a) {
+    public void addRecord(Allocation a) throws IOException {
         this.history.add(a);
+        saveHistory();
+    }
+
+
+    public Allocation chooseScenario() {
+        Random rand = new Random();
+        int scenarioNum = rand.nextInt(history.size());
+        for (int x = 0; x < scenarioNum; x ++) {
+            history.iterator().next();
+        }
+        Allocation currentScenario = history.iterator().next();
+        return currentScenario;
+    }
+
+    private void loadScenario(Allocation current) {
+
     }
 
     public void displayResult() {
@@ -83,8 +105,51 @@ public class ScenarioRecord {
         BufferedReader bufferedReader = new BufferedReader(previousFile);
         String line = bufferedReader.readLine();
         while (line != null) {
-
-
+            line = bufferedReader.readLine();
+            if (line != null && line.split(":")[0].contains("title")) {
+                String title = line.split(":")[1].trim();
+                line = bufferedReader.readLine();
+                String observer = line.split(":")[1].trim();
+                line = bufferedReader.readLine();
+                Allocation a = new Allocation(observer, title);
+                if (line.contains("groups")) {
+                    line = bufferedReader.readLine();
+                    while (line.split(":")[0].contains("name")) {
+                        Group g = new Group (line.split(":")[1].trim());
+                        a.addGroup(g);
+                        line = bufferedReader.readLine();
+                    }
+                }
+                if (line.contains("populationSize")) {
+                    a.populationSize = Integer.parseInt(line.split(":")[1].trim());
+                    line = bufferedReader.readLine();
+                }
+                if (line.contains("demography")) {
+                    line = bufferedReader.readLine();
+                    while (line.contains("group")) {
+                        Group g = a.groups.get(line.split(":")[1].trim());
+                        line = bufferedReader.readLine();
+                        int proportion = (int) (Double.parseDouble(line.split(":")[1]) * a.populationSize);
+                        a.distributePopulation(g, proportion);
+                        line = bufferedReader.readLine();
+                    }
+                }
+                if (line.contains("resourceAmount")) {
+                    a.resourceAmount = Integer.parseInt(line.split(":")[1].trim());
+                    line = bufferedReader.readLine();
+                }
+                if (line.contains("resource")) {
+                    line = bufferedReader.readLine();
+                    while (line.contains("group")) {
+                        Group g = a.groups.get(line.split(":")[1].trim());
+                        line = bufferedReader.readLine();
+                        int proportion = (int) (Double.parseDouble(line.split(":")[1].trim()) * a.populationSize);
+                        a.distributePopulation(g, proportion);
+                        line = bufferedReader.readLine();
+                    }
+                }
+                history.add(a);
+            }
         }
     }
 
@@ -92,7 +157,7 @@ public class ScenarioRecord {
         this.file = new FileWriter("out/production/honors_adhoc/record.yaml");
         file.write("Allocation: \n");
         for (Allocation a : history) {
-            file.write("  - title: " + a.title);
+            file.write("  - title: " + a.title + "\n");
             file.write("    observer: " + a.observer + "\n");
             file.write("    groups: " + "\n");
             for (Group g : a.getGroups()) {
@@ -112,5 +177,10 @@ public class ScenarioRecord {
             }
         }
         file.close();
+    }
+
+    public void clearHistory () throws IOException {
+        this.file = new FileWriter("out/production/honors_adhoc/record.yaml");
+        file.write("");
     }
 }

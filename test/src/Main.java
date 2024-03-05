@@ -3,19 +3,14 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        System.out.println("Hello world!");
         ScenarioRecord r = new ScenarioRecord();
-        Allocation x = new Allocation("researcher", "A1");
-        Group test = new Group ("test");
-        x.addGroup(test);
-        x.distributeResource(test, 10);
+        Allocation x = originalStudy1();
         r.addRecord(x);
-        r.saveHistory();
-       /*  r.addRecord(originalStudy1());
-        System.out.println();
-        r.addRecord(originalStudy2());
-        r.displayResult(); */
+        Allocation y = originalStudy2();
+        r.addRecord(y);
     }
+
+
 
     //Come up with something for the researchers to create new scenarios
     // instead of hard coding the allocation, make this to be written into a file, and

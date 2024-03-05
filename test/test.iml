@@ -7,7 +7,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="honors_adhoc" />
+    <orderEntry type="module" module-name="honors_adhoc" exported="" />
     <orderEntry type="library" name="fasterxml.jackson.dataformat.yaml" level="project" />
   </component>
 </module>
