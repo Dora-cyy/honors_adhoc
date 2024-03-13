@@ -32,6 +32,7 @@ public class ScenarioRecord {
         }
         Allocation currentScenario = history.iterator().next();
         current = currentScenario;
+        current.chosen ++;
         return currentScenario;
     }
 
@@ -72,14 +73,16 @@ public class ScenarioRecord {
             this.previousFile = new FileReader("out/production/honors_adhoc/record.yaml");
             BufferedReader bufferedReader = new BufferedReader(previousFile);
             String line = bufferedReader.readLine();
+            line = bufferedReader.readLine();
             while (line != null) {
-                line = bufferedReader.readLine();
-                if (line != null && line.split(":")[0].contains("title")) {
+                if (line.split(":")[0].contains("title")) {
                     String title = line.split(":")[1].trim();
                     line = bufferedReader.readLine();
                     String observer = line.split(":")[1].trim();
                     line = bufferedReader.readLine();
                     Allocation a = new Allocation(observer, title);
+                    a.chosen = Integer.parseInt(line.split(":")[1].trim());
+                    line = bufferedReader.readLine();
                     if (line.contains("groups")) {
                         line = bufferedReader.readLine();
                         while (line.split(":")[0].contains("name")) {
@@ -97,7 +100,7 @@ public class ScenarioRecord {
                         while (line.contains("group")) {
                             Group g = a.find(line.split(":")[1].trim());
                             line = bufferedReader.readLine();
-                            int proportion = (int) (Double.parseDouble(line.split(":")[1]) * a.populationSize);
+                            int proportion = (int) Math.round((Double.parseDouble(line.split(":")[1]) * a.populationSize));
                             a.distributePopulation(g, proportion);
                             line = bufferedReader.readLine();
                         }
@@ -111,7 +114,7 @@ public class ScenarioRecord {
                         while (line != null && line.contains("group")) {
                             Group g = a.find(line.split(":")[1].trim());
                             line = bufferedReader.readLine();
-                            int proportion = (int) (Double.parseDouble(line.split(":")[1].trim()) * a.populationSize);
+                            int proportion = (int) Math.round((Double.parseDouble(line.split(":")[1].trim()) * a.resourceAmount));
                             a.distributeResource(g, proportion);
                             line = bufferedReader.readLine();
                         }
@@ -122,7 +125,7 @@ public class ScenarioRecord {
                             Group g = a.find(line.split(":")[1].trim());
                             line = bufferedReader.readLine();
                             line = bufferedReader.readLine();
-                            while (line != null && line.contains("group")) {
+                            while (line != null && line.contains("group") && ! line.contains("in-group")) {
                                 Group out = a.find(line.split(":")[1].trim());
                                 line = bufferedReader.readLine();
                                 int score = Integer.parseInt(line.split(":")[1].trim());
@@ -148,6 +151,7 @@ public class ScenarioRecord {
             for (Allocation a : history) {
                 file.write("  - title: " + a.title + "\n");
                 file.write("    observer: " + a.observer + "\n");
+                file.write("    chosen: " + a.chosen + "\n");
                 file.write("    groups: " + "\n");
                 for (Group g : a.getGroups()) {
                     file.write("      - name: " + g.name + "\n");

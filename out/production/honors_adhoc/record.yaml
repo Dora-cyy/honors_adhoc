@@ -1,44 +1,106 @@
 Allocation: 
-  - title: a1
+  - title: test
     observer: in-group
+    chosen: 4
     groups: 
-      - name: green
-      - name: red
-      - name: blue
-    populationSize: 170
+      - name: i
+      - name: a
+      - name: c
+    populationSize: 33
     demography: 
-      - group: green
-        proportion: 0.5882352941176471
-      - group: red
-        proportion: 0.29411764705882354
-      - group: blue
-        proportion: 0.11764705882352941
-    resourceAmount: 30
+      - group: c
+        proportion: 0.30303030303030304
+      - group: a
+        proportion: 0.09090909090909091
+      - group: i
+        proportion: 0.6060606060606061
+    resourceAmount: 15
     resource: 
-      - group: green
-        proportion: 10.566666666666666
-      - group: red
-        proportion: 10.566666666666666
-      - group: blue
-        proportion: 10.566666666666666
+      - group: c
+        proportion: 0.4
+      - group: a
+        proportion: 0.3333333333333333
+      - group: i
+        proportion: 0.26666666666666666
     allocations: 
-      - in-group: green
+      - in-group: i
         out-groups: 
-          - group: green
-            score: 0
-          - group: red
-            score: 0
-          - group: blue
-            score: 0
-      - in-group: red
-        out-groups: 
-          - group: red
-            score: 0
-          - group: blue
-            score: 0
-      - in-group: blue
-        out-groups: 
-          - group: red
+          - group: c
             score: 24
-          - group: blue
+          - group: a
+            score: 0
+          - group: i
             score: 25
+      - in-group: a
+        out-groups: 
+          - group: c
+            score: 33
+          - group: a
+            score: 28
+      - in-group: c
+        out-groups: 
+          - group: c
+            score: 17
+          - group: a
+            score: 21
+  - title: testButton
+    observer: no observer
+    chosen: 5
+    groups: 
+      - name: q
+      - name: w
+      - name: e
+      - name: r
+    populationSize: 4
+    demography: 
+      - group: e
+        proportion: 0.25
+      - group: q
+        proportion: 0.25
+      - group: w
+        proportion: 0.25
+      - group: r
+        proportion: 0.25
+    resourceAmount: 16
+    resource: 
+      - group: e
+        proportion: 0.25
+      - group: q
+        proportion: 0.25
+      - group: w
+        proportion: 0.25
+      - group: r
+        proportion: 0.25
+    allocations: 
+      - in-group: q
+        out-groups: 
+          - group: e
+            score: 12
+          - group: q
+            score: 36
+          - group: w
+            score: 24
+          - group: r
+            score: 0
+      - in-group: w
+        out-groups: 
+          - group: e
+            score: 0
+          - group: w
+            score: 0
+          - group: r
+            score: 0
+      - in-group: e
+        out-groups: 
+          - group: e
+            score: 36
+          - group: r
+            score: 0
+          - group: w
+            score: 36
+      - in-group: r
+        out-groups: 
+          - group: r
+            score: 11
+          - group: q
+            score: 12

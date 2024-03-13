@@ -29,6 +29,7 @@ public class Researcher {
     private String populationList;
     private String resourceList;
     private String observerName;
+    private JButton createAnother;
 
     private boolean hasTitle = false;
     private boolean hasGroup = false;
@@ -44,6 +45,18 @@ public class Researcher {
         gridBagLayout = new GridBagLayout();
         gridBagLayout.columnWidths = new int[] {150, 250, 50, 50};
         gridBagLayout.rowHeights = new int[] {50, 50, 50, 50};
+
+        createAnother = new JButton("Create another");
+        createAnother.setSize(50,30);
+        createAnother.setMaximumSize(new Dimension(50, 30));
+
+        createAnother.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Researcher createNew = new Researcher(SC);
+                researcherFrame.setVisible(false);
+            }
+        });
 
         this.researcherFrame.getContentPane().setLayout(gridBagLayout);
         researcherFrame.getContentPane().setMaximumSize(new Dimension(1000, 1000));
@@ -259,7 +272,6 @@ public class Researcher {
             }
         });
 
-
     }
 
     private void updateSave() {
@@ -363,6 +375,7 @@ public class Researcher {
         researcherFrame.getContentPane().setLayout(new BorderLayout());
         title.setText("You have successfully created your scenario!");
         researcherFrame.getContentPane().add(title, BorderLayout.CENTER);
+        researcherFrame.getContentPane().add(createAnother, BorderLayout.AFTER_LAST_LINE);
         researcherFrame.revalidate();
     }
 }

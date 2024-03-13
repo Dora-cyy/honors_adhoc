@@ -10,11 +10,14 @@ public class Allocation {
     public int resourceAmount;
     public final Map<Group, Double> resource; //the distribution of resource in proportion to total amount
 
+    public int chosen;
+
     public Allocation (String observer, String title) {
         this.title = title;
         this.groups = new ArrayList<>();
         this.populationSize = 0;
         this.resourceAmount = 0;
+        chosen = 0;
         this.demography = new HashMap<>();
         this.resource = new HashMap<>();
         this.observer = observer;
@@ -57,11 +60,6 @@ public class Allocation {
             throw new IllegalStateException("population must be at least 1");
         }
         this.demography.put(g, (double)size / this.populationSize);
-        /* Set<Map.Entry<Group,Double>> list = this.demography.entrySet();
-        for (Map.Entry<Group, Double> i: list) {
-            Double previous = i.getValue() * originalPopulation;
-            demography.put(i.getKey(), previous / populationSize);
-        } */
     }
 
     public void distributeResource (Group g, int amount) {
