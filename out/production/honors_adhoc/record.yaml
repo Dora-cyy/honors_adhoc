@@ -1,27 +1,44 @@
 Allocation: 
-  - title: A2
-    observer: researcher
+  - title: a1
+    observer: in-group
     groups: 
-      - name: dusek
-      - name: tausig
-    populationSize: 20
+      - name: green
+      - name: red
+      - name: blue
+    populationSize: 170
     demography: 
-      - group: dusek
-        proportion: 1.0
-      - group: tausig
-        proportion: 0.5
-    resourceAmount: 20
+      - group: green
+        proportion: 0.5882352941176471
+      - group: red
+        proportion: 0.29411764705882354
+      - group: blue
+        proportion: 0.11764705882352941
+    resourceAmount: 30
     resource: 
-  - title: A1
-    observer: in-group member
-    groups: 
-      - name: dusek
-      - name: tausig
-    populationSize: 20
-    demography: 
-      - group: tausig
-        proportion: 0.5
-      - group: dusek
-        proportion: 1.0
-    resourceAmount: 20
-    resource: 
+      - group: green
+        proportion: 10.566666666666666
+      - group: red
+        proportion: 10.566666666666666
+      - group: blue
+        proportion: 10.566666666666666
+    allocations: 
+      - in-group: green
+        out-groups: 
+          - group: green
+            score: 0
+          - group: red
+            score: 0
+          - group: blue
+            score: 0
+      - in-group: red
+        out-groups: 
+          - group: red
+            score: 0
+          - group: blue
+            score: 0
+      - in-group: blue
+        out-groups: 
+          - group: red
+            score: 24
+          - group: blue
+            score: 25
